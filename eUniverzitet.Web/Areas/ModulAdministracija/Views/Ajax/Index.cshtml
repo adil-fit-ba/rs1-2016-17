@@ -1,0 +1,26 @@
+﻿@model eUniverzitet.Web.Areas.ModulAdministracija.Models.PredajeUrediVM
+
+
+
+    
+    @*<script src="@Url.Content("~/Scripts/jquery-2.1.3.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>*@
+
+<label>ovo neki tmp texbox</label>
+<input type="text"/>
+
+    @using (Ajax.BeginForm("Poziv", "Ajax", new AjaxOptions {UpdateTargetId = "rezultat"}))
+    {
+        <label>unos</label>
+        <input type="text" name="ime"/>
+        <input type="submit" value="Snimi" class="btn btn-danger"/>
+    }
+    <div id="rezultat"><!-- Will be populated by AJAX method --></div>
+
+
+
+
+
+

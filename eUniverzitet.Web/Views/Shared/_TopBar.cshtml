@@ -1,0 +1,43 @@
+﻿@using eUniverzitet.Data.Models
+@using eUniverzitet.Web.Helper
+@{
+    Korisnik k = @Autentifikacija.GetLogiraniKorisnik(Context);
+}
+<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+    <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+
+    <div class="navbar-inner">
+        <div class="navbar-header">
+
+            <a href="/Home" class="navbar-brand">
+                TEST-DEMO
+            </a>
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+        </div>
+
+        <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+            <div>
+                <div class="right clearfix">
+                    
+                    <ul class="nav navbar-nav pull-right right-navbar-nav">
+                       
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                <span>@k.Ime_prezime - <span class="text-default">@k.KorisnickoIme</span></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="hide"><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+                                <li class="divider hide"></li>
+                                <li><a href="@Url.Action("Logout", "Autentifikacija", new {area = ""})"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul> 
+
+                </div> 
+            </div>
+        </div> 
+    </div> 
+</div>
+

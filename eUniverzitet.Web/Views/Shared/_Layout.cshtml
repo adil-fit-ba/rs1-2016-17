@@ -1,0 +1,108 @@
+﻿@using System.Linq
+@using eUniverzitet.Data.DAL
+@using eUniverzitet.Data.Models
+@using eUniverzitet.Web.Helper
+@{
+    Korisnik korisnik = Autentifikacija.GetLogiraniKorisnik(Context);
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Dashboard - PixelAdmin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <!-- Open Sans font from Google CDN -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+    <!-- Pixel Admin's stylesheets -->
+    <link href="~/Template/stylesheets/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Template/stylesheets/pixel-admin.css" rel="stylesheet" type="text/css">
+    <link href="~/Template/stylesheets/widgets.css" rel="stylesheet" type="text/css">
+    <link href="~/Template/stylesheets/rtl.css" rel="stylesheet" type="text/css">
+    <link href="~/Template/stylesheets/themes.css" rel="stylesheet" type="text/css">
+
+    <!--[if lt IE 9]>
+        <script src="~/Template/javascripts/ie.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="theme-default main-menu-animated">
+
+    <div id="main-wrapper">
+
+        @Html.Partial("_TopBar")
+
+        <div id="main-menu" role="navigation">
+            <br />
+            <div id="main-menu-inner">
+                <ul class="navigation">
+                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.SuperAdministrator))
+                    {
+                        @Html.Partial("_UlogaSuperAdmin")
+                    }
+
+                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.AdministratorInstitucije))
+                    {
+                        @Html.Partial("_UlogaAdministratorInstitucije")
+                    }
+
+                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.StudentskaSluzba))
+                    {
+                        @Html.Partial("_UlogaStudentskaSluzba")
+                    }
+
+                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.Edukator))
+                    {
+                        @Html.Partial("_UlogaEdukator")
+                    }
+
+                    @if (korisnik.Student != null)
+                    {
+                        @Html.Partial("_UlogaStudent")
+                    }
+                </ul>
+            </div>
+
+        </div>
+
+        <div id="content-wrapper">
+
+            @{
+                DateTime? trenutnoVrijeme = DateTime.Now;
+            }
+                @trenutnoVrijeme.ToMyStrDMYY_HMM("?")   
+            @RenderBody()
+        </div>
+
+            <div id="main-menu-bg"></div>
+        </div>
+
+    <!-- Get jQuery from Google CDN -->
+    <!--[if !IE]>
+    <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">' + "<" + "/script>"); </script>
+    <![endif]--> -->
+
+    <!--[if lte IE 9]>
+        <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">'+"<"+"/script>"); </script>
+    <![endif]-->
+    <!-- Pixel Admin's javascripts -->
+    <script src="~/Scripts/jquery-2.1.3.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Template/javascripts/pixel-admin.js"></script>
+    <script src="~/Template/javascripts/libs/jquery-datatables-1.10.0/datatables.bootstrap3.js"></script>
+
+    <script type="text/javascript">
+        init.push(function () {
+            // Javascript code here
+        })
+        window.PixelAdmin.start(init);
+    </script>
+
+</body>
+</html>
