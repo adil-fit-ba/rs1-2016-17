@@ -1,0 +1,19 @@
+﻿
+@model MVC.Areas.ModulAdministracija.Models.FakultetUrediVM
+
+<h2>Upravljanje fakultetima</h2>
+
+@using (Html.BeginForm("Snimi", "Fakultet"))
+{
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <label>Naziv</label>
+        <div>
+            @Html.TextBoxFor(model => model.Opis, new {@class = "form-control"})
+        </div>
+    </div>
+    
+    <input type="submit" value="Snimi" class="btn btn-danger" />
+}
+

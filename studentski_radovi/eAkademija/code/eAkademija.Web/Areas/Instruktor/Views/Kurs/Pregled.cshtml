@@ -1,0 +1,105 @@
+﻿@using eAkademija.Data.Enums
+@model eAkademija.Web.Areas.Instruktor.ViewModels.KursPregledVM
+
+@{ 
+    ViewBag.Title = "Pregled kursa";
+}
+
+<div class="row page-content">
+
+    <div class="col-md-12">
+
+        <ol class="breadcrumb">
+            <li><a href="~/">Home</a></li>
+            <li><a href="~/Instruktor/Kurs">Kursevi</a></li>
+            @*<li class="active">@Model.KursNaziv</li>*@
+        </ol>
+
+
+        <div class="page-header">
+            <h1>@Model.KursNaziv<!--small>Subtext for header</!--small--></h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="padding-bottom: 20px">
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    @{ string videoPutanja = "https://www.youtube.com/embed/" + @Model.KursVideoId + "?rel=0&amp;controls=1"; }
+                    <iframe class="embed-responsive-item"
+                            src="@videoPutanja"
+                            frameborder="0"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+
+        <blockquote>
+            @Model.KursOpis
+        </blockquote>
+
+
+        <div class="
+             ">
+            <button class="btn btn-primary" type="button">
+                Nivo <span class="badge">@Model.KursNivo.GetDisplayName()</span>
+            </button>
+            <button class="btn btn-success" type="button">
+                Ocjena <span class="badge">
+                @if (Model.KursOcjenaAvg != null)
+                { @String.Format("{0:0.00}", Model.KursOcjenaAvg) }
+                else {
+                    <span>-</span>
+                }</span>
+            </button>
+            <button class="btn btn-warning" type="button">
+                Ukupno ocjena <span class="badge">@Model.KursOcjenaCount</span>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#homeworks" aria-controls="zadace" role="tab" data-toggle="tab">Zadaće <span class="badge">@Model.KursZadacaCount</span></a>
+                </li>
+                <li role="presentation">
+                    <a href="#qa" aria-controls="profile" role="tab" data-toggle="tab">Pitanja i Odgovori <span class="badge">@Model.KursPitanjeOdgovorCount</span></a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+                <div role="tabpanel" class="tab-pane fade in active" id="homeworks">
+
+                    <div class="col-sm-12 text-right" style="padding: 8px 0px">
+                        @Ajax.ActionLink("Zadaj novu zadaću", "Zadaj", "Zadaca",
+                            new { @kursId = Model.KursId },
+                            new AjaxOptions { UpdateTargetId = "KursZadace" },
+                            new { @class = "btn btn-sm btn-primary", @style = "margin-right: 8px" })
+                    </div>
+
+                    <div id="KursZadace">
+                        @Html.Action("Index", "Zadaca", new { @kursId = Model.KursId })
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="qa">
+                    @Html.Action("Index", "PitanjeOdgovor", new { @kursId = Model.KursId })
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

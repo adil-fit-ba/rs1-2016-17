@@ -1,0 +1,55 @@
+﻿@using eAkademija.Web.Areas.Instruktor.ViewModels
+@model eAkademija.Web.Areas.Instruktor.ViewModels.PitanjeOdgovor
+
+@{
+    Layout = null;
+    Boolean jeOdgovoreno = false;
+}
+
+
+<div class="row">
+    <div class="col-md-12" style="padding: 15px">
+
+        @foreach (PitanjeOdgovorRow item in Model.PitanjaOdgovori)
+        {
+            jeOdgovoreno = (item.PitanjeOdgDatumOdgovora == null ? false : true);
+
+
+            <div class="media pitanjeodgovor-stavka">
+                <div class="media-left">
+                    <a href="#"><img class="media-object" src="@item.PitanjeOdgStudentSlikaPutanja" style="width:64px;height:64px;" alt="Photo @item.PitanjeOdgStudentImePrezime"></a>
+                    @item.PitanjeOdgStudentImePrezime
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">@item.PitanjeOdgDatumPitanja</h4>
+                    <div class="custom-media-text">
+                        @item.PitanjeOdgPitanje
+                    </div>
+
+                    <div id="Odgovor-@item.PitanjeOdgId">
+                        @if (jeOdgovoreno)
+                        {
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#"><img class="media-object" src="~/profile_images/instruktor3.jpg" alt="instruktor photo"></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">@item.PitanjeOdgDatumOdgovora</h4>
+                                    <div class="custom-media-text">
+                                        @item.PitanjeOdgOdgovor
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @Ajax.ActionLink("Odgovori", "Odgovori", "PitanjeOdgovor", new { @id = item.PitanjeOdgId }, new AjaxOptions { UpdateTargetId = "Odgovor-"+item.PitanjeOdgId }, new { @class = "btn btn-xs btn-success" });
+                        }
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

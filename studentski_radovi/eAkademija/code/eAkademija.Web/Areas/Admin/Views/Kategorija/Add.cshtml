@@ -1,0 +1,16 @@
+﻿@model eAkademija.Data.Model.Kategorija
+@{ 
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Add", new AjaxOptions { UpdateTargetId = "index-content", HttpMethod = "Post" }))
+{
+    <div class="form-group">
+          <label> Naziv Kategorije </label>
+          @Html.TextBoxFor(x => x.Naziv ,new { @class = "form-group"})
+         <button class="btn btn-success save-category"> Spasi </button>
+         <button type="button" class="btn btn-danger close-category-form"> Zatvori </button>
+
+    </div>
+  
+}

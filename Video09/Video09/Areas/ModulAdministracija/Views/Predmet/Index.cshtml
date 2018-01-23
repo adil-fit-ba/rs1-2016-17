@@ -1,0 +1,73 @@
+﻿@using MVC.Areas.ModulAdministracija.Models
+@using MVC.Migrations
+@model PredmetIndexVM
+
+
+<h2>Upravljanje predmetima</h2>
+
+<div>
+    <div class="form-group">
+        <label class="control-label">Fakultet</label>
+        <input type="text" class="form-control" value="@Model.FakultetNaziv" disabled />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Smjer</label>
+        <input type="text" class="form-control" value="@Model.SmjerNaziv" disabled/>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label">NPP</label>
+        <input type="text" class="form-control" value="@Model.NppNaziv" disabled />
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Godina studija</th>
+            <th>Naziv predmeta</th>
+            <th>ECTS</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PredmetIndexVM.PredmetInfo x in Model.Predmeti)
+        {
+            <tr>
+                <td>@x.GodinaStudija</td>
+                <td>@x.Naziv</td>
+                <td>@x.Ects</td>
+                <td>
+                        @Html.ActionLink("Obriši", "Obrisi", new { predmetId = x.Id }, new { @class = "btn btn-danger btn-sm" })
+                        @Html.ActionLink("Uredi", "Uredi", new { predmetId = x.Id }, new { @class = "btn btn-info btn-sm" })
+
+                        @using (Ajax.BeginForm("Index", "Predaje", new {}, new AjaxOptions() { UpdateTargetId = "predavaci-output"}, new {@style="display: inline"}))
+                        {
+                            @Html.Hidden("predmetId", x.Id)
+                            <input type="submit" value="Predavači" class="btn btn-warning btn-sm" />
+                        } 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Dodaj novi", "Dodaj", new {nppId = Model.NppId}, new {@class = "btn btn-success btn-sm"})
+</div>
+
+
+
+<div class="panel panel-success" style="margin-top: 20px">
+    <div class="panel-heading">
+        ??
+    </div>
+    <div class="panel-body">
+        <div id="predavaci-output"></div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,55 @@
+﻿@model eAkademija.Web.Areas.Student.ViewModels.ZadacaVM
+
+
+@{
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+
+        <h4>Dodaj rješenje zadaće</h4>
+
+        @using (Ajax.BeginForm("Snimi", "Zadaca", new AjaxOptions { UpdateTargetId = "KursZadace" }, new { @class = "frmZadaca form-horizontal" }))
+        {
+            @Html.HiddenFor(x => x.StudentZadacaId)
+            @Html.HiddenFor(x => x.StudentKursId)
+            @Html.HiddenFor(x => x.ZadacaId)
+            @Html.HiddenFor(x=>  x.KursId)
+
+    
+
+            <div class="form-group">
+                <label for="ZadacaOpis" class="control-label col-sm-4">Opis</label>
+                @Html.TextAreaFor(x => x.Rjesenje,new { @class = "form-control editorHtml" })
+                @Html.ValidationMessageFor(x => x.Rjesenje )
+            </div>
+
+
+
+
+            <input type="submit" class="btn btn-success" value="Sačuvaj" /> <span>&nbsp;</span>
+
+        }
+
+        <p>
+            @using (Ajax.BeginForm("Odustani", "Zadaca", new AjaxOptions { UpdateTargetId = "KursZadace" }))
+            {
+                @Ajax.ActionLink("<< Poništi i vrati se nazad", "Odustani", "Zadaca",
+                                     new { @kursId = Model.KursId },
+                                     new AjaxOptions { UpdateTargetId = "KursZadace" },
+                                     new { @class = "btn btn-sm btn-danger" })
+            }
+        </p>
+
+
+    </div>
+</div>
+
+<script>
+
+
+
+
+</script>

@@ -1,0 +1,20 @@
+﻿@model eAkademija.Data.Model.Potkategorija
+
+@{ 
+    Layout = null;
+}
+
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", UpdateTargetId = ViewBag.ajaxLoad }))
+{   
+    <input type="hidden" name="categoryId" value="@ViewBag.categoryId" />
+
+    <div class="form-group">
+        <label> Nova podkategorija </label>
+        @Html.TextBoxFor(x => x.Naziv, new { @class = "form-control" })
+    </div>
+
+    <button class="btn btn-success"> Spasi </button>
+    @Ajax.ActionLink("Odustani", "EmptyView", "Podkategorija" , new AjaxOptions { UpdateTargetId = "podkategorija-new_"+ ViewBag.categoryId }, new { @class = "btn btn-danger" })
+}
+
+

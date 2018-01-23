@@ -1,0 +1,89 @@
+﻿
+@model List<eAkademija.Web.Areas.Student.ViewModels.StatistikaVM>
+
+@{ 
+    Layout = null;
+}
+
+
+
+<div class="panel panel-default">
+    <div id="heading-2" class="panel-heading" role="tab">
+        <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-statatistika" class="collapsed" aria-expanded="false">
+               Statistika Kursa <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </a>
+        </h4>
+
+    </div>
+
+    <div id="collapse-statatistika" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" style="height: 0px;">
+        <div class="row panel-body">
+            
+
+
+
+
+            <div class="table-responsive" style="padding: 0 10px;">
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th class="col-xs-5">Ime studenta</th>
+                            <th class="col-xs-2">ocjena</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                         {
+                            <tr>
+
+                                <td>
+                                    @item.ImePolaznika
+                                </td>
+                                <td>
+
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star @(item.Ocjena>1.4?"checked":"")"></span>
+                                    <span class="fa fa-star @(item.Ocjena>2.4?"checked":"")"></span>
+                                    <span class="fa fa-star @(item.Ocjena>3.4?"checked":"") "></span>
+                                    <span class="fa fa-star @(item.Ocjena>4.4?"checked":"")"></span>
+                                </td>
+
+                            </tr>
+                        }
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-success" type="button">
+                    Prosječna Ocjena <span class="badge">
+
+                        @if (Model.Sum(item => item.Ocjena) != 0)
+                        {
+                            @(  (Model.Sum(item => item.Ocjena) / Model.Count()).ToString("0.0"))
+                        }
+                        else
+                        {
+                            @("-")
+                        }
+
+
+                    </span>
+                </button>
+                <button class="btn btn-warning" type="button">
+                    Ukupno ocjena  <span class="badge">@Model.Count()</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+

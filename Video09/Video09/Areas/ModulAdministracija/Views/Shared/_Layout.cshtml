@@ -1,0 +1,53 @@
+﻿@using MVC.Helper
+@using MVC.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sistem za studentsku službu</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body style="background: url('/Content/Pattern.png')">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Početna", "Index", "Home", new {area = "ModulAdministracija"}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Akademske godine", "Index", "AkademskaGodina")</li>
+                <li>@Html.ActionLink("Fakulteti -> smjerovi -> NPP -> predmeti -> predavači", "Index", "Fakultet")</li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @Html.Partial("_NavBarLogiraniKorisnik")
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container body-content" style="background: white; border: 1px solid #D1CECB; min-height: 700px;">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - FIT</p>
+    </footer>
+</div>
+
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,51 @@
+﻿    @using Microsoft.AspNet.Identity
+
+
+
+
+<!DOCTYPE html>
+<html>
+@Html.Partial("~/Views/Partial/Header.cshtml")
+<body>
+   @Html.Action("Index", "Navigation", new { area = "" })
+@*   @Html.Partial("~/Views/Partial/Navigation.cshtml", new ViewDataDictionary())*@
+
+    @RenderSection("Jumbotron", false)
+  @*  <div class="container body-content">*@
+    
+    @RenderBody()
+      
+    
+
+   @* </div>*@
+    @Html.Partial("~/Views/Partial/Footer.cshtml")
+
+    <script>
+        $(document).ready(function () {
+            (
+                function (jQuery) {
+                    $(document).ready(function (event) {
+                        $(document).on('click input', 'input.has-picker', function (e) {
+                            var jQuerythis = $(this);
+                            jQuerythis.prop('type', 'text').datepicker({
+                                showOtherMonths: true,
+                                selectOtherMonths: true,
+                                showButtonPanel: false,
+                                changeMonth: true,
+                                changeYear: false,
+                                dateFormat: 'dd.mm.yy',
+                                showWeek: true,
+                                firstDay: 1
+                            });
+
+                            setTimeout(function () {
+                                jQuerythis.datepicker('show');
+                            }, 1);
+                        });
+                    });
+                })(jQuery, jQuery.ui);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+﻿@using eAkademija.Web.ViewModels;
+
+@model IEnumerable<eAkademija.Web.ViewModels.Front_Kurs>
+
+
+@{ int KursBroj = 0; }
+
+<div class="container body-content">
+
+    @if (Model.Any())
+    {
+
+        <div class="kurs-front-title-blocks">
+
+            <h3>Trenutno aktuelni @ViewBag.NazivKategorije</h3>
+            <hr />
+        </div>
+
+        <div class="row kurs-row">
+            @foreach (Front_Kurs item in Model)
+            {
+                if (KursBroj == 8) { break; }
+                <div class="col-xs-6 col-sm-3" style="margin-bottom: 20px;">
+                    <a style="text-decoration: none;" href="@Url.Action("SingleKurs", "FrontKurs", new { area = "", ID = item.Id })">
+                        <article class="kurs-front">
+
+                            <div class="image aspect-16by9">
+                                <img class="img-responsive" src="@item.KursThumbImagePutanja" alt="">
+
+                            </div>
+                            <div class="kurs-front-sadrzaj">
+                                <h5 class="kurs-front-title">@item.KursNaziv</h5>
+                                <div class="kurs-front-instruktor">
+                                    <span class="db" data-purpose="course-card-instructor-titles">Author: @item.Instruktor</span>
+                                </div>
+                                <div class="description">
+
+                                    <div class="text-right">
+                                        Polaznika <span class="badge">@item.KursPolazniciCount</span>
+
+                                        @{switch ((int)item.KursKursNivo)
+                                            {
+                                                case 1:
+                                                    <span>Nivo</span> <span class="label label-info">@item.KursKursNivo</span>
+                                                    break;
+                                                case 2:
+                                                    <span>Nivo</span><span class="label label-success">@item.KursKursNivo</span>
+                                                    break;
+                                                case 3:
+                                                    <span>Nivo</span> <span class="label label-warning">@item.KursKursNivo</span>
+                                                    break;
+                                                default:
+                                                    <span>Nivo</span> <span class="label label-primary">@item.KursKursNivo</span>
+                                                    break;
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+                    </a>
+                </div>
+
+                                            KursBroj++;
+                                            if (KursBroj > 0 && KursBroj % 4 == 0)
+                                            {
+                                                <div class="clearfix"></div>
+                                                }
+                                            }
+        </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="kurs-front-title-blocks">
+
+                                                    <h2>Trenutno nema aktuelnih kurseva</h2>
+                                                    <hr />
+                                                </div>
+                                            }
+
+    <hr />
+
+</div>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<eAkademija.Data.Model.Zadaca>
+
+@{
+    Layout = null;
+    Boolean firstIteration = true;
+    string openByDefault = "";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel-group" id="accordion" role="tablist">
+
+            @foreach (var item in Model)
+            {
+                openByDefault = (firstIteration == true ? "in" : "");
+
+                <div class="panel panel-default">
+                    <div id="heading-@item.Id" class="panel-heading" role="tab">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" 
+                                href="#collapse-@item.Id" class="collapsed">
+                                @item.Naslov (<strong>@item.UkupnoBodova bodova</strong>)
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapse-@item.Id" class="panel-collapse collapse @openByDefault" role="tabpanel">
+                        <div class="row panel-body">
+                            <div class="col-md-7">
+                                @item.Opis
+                            </div>
+                            <div class="col-md-5 text-right">
+
+                                @Html.ActionLink("Pregled radova", "Index", "StudentZadaca",
+                                     new { @zadacaId = item.Id },
+                                     new { @class = "btn btn-sm btn-warning" })
+
+                                @Ajax.ActionLink("Uredi", "Uredi", "Zadaca",
+                                     new { @Id = item.Id },
+                                     new AjaxOptions { UpdateTargetId = "KursZadace" },
+                                     new { @class = "btn btn-sm btn-success" })
+
+                                @Ajax.ActionLink("Obriši", "Obrisi", "Zadaca",
+                                     new { @Id = item.Id, @kursId = item.KursId },
+                                     new AjaxOptions { UpdateTargetId = "KursZadace" },
+                                     new { @class = "btn btn-sm btn-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                firstIteration = false;
+            }
+
+        </div>
+    </div>
+</div>

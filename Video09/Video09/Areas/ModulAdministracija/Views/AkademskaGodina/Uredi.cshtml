@@ -1,0 +1,17 @@
+﻿
+@model MVC.Areas.ModulAdministracija.Models.AkademskaGodinaUrediVM
+
+<h2>Upravljanje akademskim godinama</h2>
+
+@using (Html.BeginForm("Snimi", "AkademskaGodina"))
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        <label>Naziv</label>
+        <div>
+           @Html.TextBoxFor(model => model.Opis, new {@class = "form-control"})
+        </div>
+    </div>
+    <input type="submit" value="Snimi" class="btn btn-danger" />
+}
+

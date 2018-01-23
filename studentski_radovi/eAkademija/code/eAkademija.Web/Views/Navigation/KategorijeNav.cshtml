@@ -1,0 +1,51 @@
+﻿@model eAkademija.Web.Areas.Instruktor.ViewModels.KursManageVM
+
+@{ int FirstPass = 0;}
+
+<ul class="dropdown-menu multi-level">
+    
+
+
+    @foreach (var kategorija in Model.KursKategorijaList)
+    {
+
+        if (FirstPass == 0)
+        {
+            <li>
+                <a href="@Url.Action("SveKategorijePage", "FrontKurs")">Sve kategorije</a>
+            </li>
+        }
+
+
+        if (Model.KursPotkategorijaList.Where(w => w.Kategorija.Id == kategorija.Id).FirstOrDefault() != null)
+        {
+            <li class="dropdown-submenu">
+                <a href="@Url.Action("KategorijaPage", "FrontKurs", new { kategorijaId = kategorija.Id })"> @kategorija.Naziv</a>
+                <ul class="dropdown-menu">
+                    @foreach (var potkategorija in Model.KursPotkategorijaList.Where(w => w.Kategorija.Id == kategorija.Id))
+                    {
+                    <li><a href="@Url.Action("PodKategorijaPage", "FrontKurs", new { kategorijaId = kategorija.Id, podKategorijaId = potkategorija.Id })">@potkategorija.Naziv</a></li>
+                    }
+                </ul>
+
+
+            </li>
+
+        }
+        else
+        {
+
+            <li>
+                <a href="@Url.Action("KategorijaPage", "FrontKurs", new { kategorijaId = kategorija.Id })">@kategorija.Naziv</a>
+            </li>
+        }
+
+        FirstPass++;
+        
+   
+    }
+
+
+</ul>
+
+

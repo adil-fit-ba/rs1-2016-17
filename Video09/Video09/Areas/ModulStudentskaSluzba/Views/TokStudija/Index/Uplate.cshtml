@@ -1,0 +1,29 @@
+﻿@using MVC.Areas.ModulStudentskaSluzba.Models
+@using MVC.Areas.ModulStudentskaSluzba.Models.TokStudija
+@using MVC.Helper
+@model List<UplataVM>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Datum uplate</th>
+        <th>Svrha</th>
+        <th>Iznos</th>
+        <th>Evidentira korisnik</th>
+        <th>Evidentirano datum</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (UplataVM x in Model)
+        {
+            <tr>
+                <td>@x.DatumUplate</td>
+                <td>@x.Svrha</td>
+                <td>@x.Iznos</td>
+                <td>@x.EvidentiranoKorisnik</td>
+                <td>@x.EvidentiranoDatum.ToMyStrDMYYYY()</td>
+            </tr>
+        }
+    </tbody>
+</table>

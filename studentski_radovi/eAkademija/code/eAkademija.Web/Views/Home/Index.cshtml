@@ -1,0 +1,90 @@
+﻿@model IEnumerable<eAkademija.Web.ViewModels.Front_Kurs>
+@section Jumbotron {
+<div class="jumbotron cover" id="home" style="background-image: url('/Images/MainBgEAkademija.jpg');">
+    <div class="inner text-center">
+        <div class="container jumbo-front">
+            <h1>
+                Šta ćete danas <strong>naučiti?</strong>
+            </h1>
+            <p>Ugodno iz vašeg doma učite potrebne vještine kako bi uspjeli u poslovnom svijetu</p>
+          @*  @Html.ActionLink("Zelim da učim", "Index", "Home", new { @area = "" }, new { @class = "btn btn-danger" })*@
+        </div>
+    </div>
+</div>
+}
+
+
+<div>
+    @Html.Action("Index","FrontKurs")
+</div>
+
+
+
+<div class="row cta-row">
+    <div class="container">
+        <div class="col-sm-6 cta-student-block">
+            <div class="cta-block center-block">
+                <div class="kurs-front-title-blocks">
+                    <h2>Postani student</h2>
+                </div>
+                <div class="">
+                    Naučite svaki dan nešto novo iz mnoštva aktuelni kategorija današnjih zanimanja
+                </div>
+                <div class="cta-button">
+                    <a href="/Account/Register?zelimbiti=Student" class="btn btn-primary">Postani student</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="cta-block center-block">
+                <div class="kurs-front-title-blocks">
+                    <h2>Postani instruktor</h2>
+                </div>
+                <div class="">
+                    Pomoću eAkademije možete da podučavate ono što volite.
+                </div>
+                <div class="cta-button">
+                    <a href="/Account/Register?zelimbiti=Instruktor" class="btn btn-success">Postani instruktor</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div style="margin:50px 0;">
+    @Html.Action("ListKategorije", "FrontKurs", new { kategorijaId = 3 })
+</div>
+
+
+
+<div class="row cta-row">
+    <div class="container">
+        <!-- Left column -->
+        <div class="text-center text-md-right right-column col-md-4">
+            <img src="~/Images/TestimonialBoy1.jpg" alt="testimonial image" style="width:100%;">
+        </div>
+        <!-- Right column -->
+        <div class="col-md-8">
+            <div class="card-block">
+                <i class="fa fa-quote-right"></i>
+                <p class="pr-4">Po završetku eAkademije stekao sam dovoljno znanja da se prijavim na testiranje u partnerskoj IT kompaniji Imtec, za poziciju inženjer-programer. Zadovoljio sam sve kriterije i dobio posao.</p>
+                <hr />
+                <h4 class="">Admir Hodzić</h4>
+                <span class="">C# Developer</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div style="margin:50px 0;">
+    @Html.Action("ListKategorije", "FrontKurs", new { kategorijaId = 1 })
+</div>
+<div style="margin:50px 0;">
+    @Html.Action("ListKategorije", "FrontKurs", new { kategorijaId = 2 })
+</div>

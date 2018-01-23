@@ -1,0 +1,186 @@
+﻿@using eAkademija.Data.Enums
+@using eAkademija.Web.Areas.Instruktor.ViewModels
+@model eAkademija.Web.Areas.Instruktor.ViewModels.KursIndexVM
+
+@{
+    string title = "Kursevi instruktora " + User.Identity.Name;
+    ViewBag.Title = title;
+}
+
+<div id="ContentWrapper">
+
+    <ol class="breadcrumb">
+        <li><a href="~/">Home</a></li>
+        <li class="active">Kursevi</li>
+    </ol>
+
+    <div class="page-header">
+        <h1>@title</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+                @using (Html.BeginForm("Pretrazi", "Kurs", FormMethod.Post, new { @class = "frmPretraga form-inline" }))
+                {
+                    string doCheck = (Model.KursPretragaIzostaviBezPolaznika ? "checked" : "");
+
+                    <div class="row" style="padding-bottom: 10px">
+
+                        <div class="form-group txt-search col-sm-8">
+                            <input type="text" name="KursPretragaNaziv" class="form-control" value="@Model.KursPretragaNaziv" placeholder="Traži u nazivu" />
+                            <input type="text" name="KursPretragaOpis" class="form-control" value="@Model.KursPretragaOpis" placeholder="Traži u opisu" />
+                        </div>
+
+                        <div class="form-group enum-select-boxes col-sm-4">
+                            @Html.EnumDropDownListFor(x => Model.KursPretragaKursNivo, "-- Nivo --", new { @class = "form-control" })
+                            @Html.EnumDropDownListFor(x => Model.KursPretragaKursStatus, "-- Status --", new { @class = "form-control" })
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="form-group col-sm-7">
+
+                            @{ 
+                                // koristim substring umjesto .ToShortDateString() 
+                                // jer su ovi datumi nullable
+
+                                string datumOd = "";
+                                if (Model.KursPretragaDatumOd != null)
+                                {
+                                    datumOd = Convert.ToString(Model.KursPretragaDatumOd).Substring(0, 11);
+                                }
+
+                                string datumDo = "";
+                                if (Model.KursPretragaDatumDo != null)
+                                {
+                                    datumDo = Convert.ToString(Model.KursPretragaDatumDo).Substring(0, 11);
+                                }
+                            }
+
+
+                            <label for="KursPretragaDatumOd" class="control-label">Objavljeni od</label>
+                            @Html.TextBoxFor(x => Model.KursPretragaDatumOd, new { @class = "has-picker txtDatum form-control", @Value = @datumOd, @placeholder = "Izaberite datum" })
+
+                            <label for="KursPretragaDatumDo" class="control-label"> do</label>
+                            @Html.TextBoxFor(x => Model.KursPretragaDatumDo, new { @class = "has-picker txtDatum form-control", @Value = @datumDo, @placeholder = "Izaberite datum" })
+
+                        </div>
+
+                        <div class="form-group col-sm-4">
+                            <label class="checkbox-inline text-left">
+                                <input type="checkbox" id="KursPretragaIzostaviBezPolaznika" name="KursPretragaIzostaviBezPolaznika" value="doIzostaviBezPolaznika" @doCheck> Ne prikazuj kurseve bez polaznika?
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-1 text-right">
+                            <input type="submit" class="btn btn-sm btn-warning" value="Traži" />
+                        </div>
+
+                    </div>
+
+                }
+
+            <hr />
+
+            @foreach (KursRow item in Model.Kursevi)
+            {
+                bool flagged = (item.KursStatus.ToString().Equals("FLAGGED_FOR_ARCHIVING") ? true : false);
+                bool archived = (item.KursStatus.ToString().Equals("ARCHIVED") ? true : false);
+                string klasaArhiviran = (flagged ? "arhiviran" : "");
+
+                <div class="media">
+                    <div class="media-left">
+                        @if (flagged)
+                        {
+                            <img class="media-object" width="240" src="~/profile_images/video_placeholder.jpg" title="Kurs je označen za arhiviranje">
+                        }
+                        else if (archived)
+                        {
+                            <img class="media-object" width="240" src="~/profile_images/video_placeholder.jpg" title="Kurs je arhiviran">
+                        }
+                        else
+                        {
+                            <a href="Kurs/Pregled/@item.KursId">
+                                <img class="media-object" width="240" src="@item.KursThumbImagePutanja" title="@item.KursNaziv">
+                            </a>
+                        }
+                    </div>
+
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            @if (flagged)
+                            {
+                                <span class="text-muted">@item.KursNaziv</span>
+                            }
+                            else if (archived)
+                            {
+                                <span class="text-muted">ARHIVIRANO :: @item.KursNaziv</span> 
+                            }
+                            else
+                            { 
+                                <a href="~/Instruktor/Kurs/Pregled/@item.KursId">@item.KursNaziv</a> 
+                            }
+
+                        </h4>
+                        <div class="custom-media-text">
+                            <p>@item.KursOpis</p>
+                        </div>
+
+
+                        @if (flagged)
+                        {
+                            <button type="button" class="btn btn-default btn-xs" disabled="disabled">Označen za arhiviranje</button>
+                        }
+                        else
+                        {
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        @if (@item.KursPolazniciCount > 0)
+                                        {
+                                            <a class="btn btn-xs btn-primary" href="/Instruktor/Kurs/PrikaziPolaznike?kursId=@item.KursId">Polaznici</a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-xs btn-primary" disabled="disabled">Polaznici</button>
+                                        }
+
+                                        @Html.ActionLink("Uredi", "Uredi", new { @id = item.KursId}, new { @class = "btn btn-xs btn-success" })
+
+
+                                        @if (@item.KursPolazniciCount > 0)
+                                        {
+                                            <a href="/Reports/Instruktor/KursById.aspx?id=@item.KursId" target="_blank" class="btn btn-xs btn-warning">Izvještaj</a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-xs btn-warning" disabled="disabled">Izvještaj</button>
+                                        }
+
+
+                                        @Html.ActionLink("Arhiviraj", "Arhiviraj", new { @id = item.KursId }, new { @class = "btn btn-xs btn-default" })
+                                    </div>
+
+                                    <div class="col-sm-7 text-right">
+                                        Polaznika <span class="badge">@item.KursPolazniciCount</span>
+                                        Nivo <span class="badge">@item.KursKursNivo.GetDisplayName()</span>
+                                        Objavljeno <span class="badge">@item.KursDatumKreiranja.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+                }
+
+            </div>
+    </div>
+
+</div>
+
+

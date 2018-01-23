@@ -1,0 +1,58 @@
+﻿@using MVC.Areas.ModulStudentskaSluzba.Models
+@model StudentIndexVM
+
+
+<h2>Upravljanje studentima</h2>
+
+<form>
+    <div class="form-inline">
+        @Html.DropDownListFor(model => model.SmjeriId, Model.smjeroviStavke, new { @class = "form-control" })
+        <input type="submit" value="Filtiraj" class="btn btn-default" />
+    </div>
+</form>
+
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Broj indeksa</th>
+            <th>Fakultet</th>
+            <th>Smjer</th>
+            <th>Broj ECTS-ova</th>
+            <th>Broj položenih predmeta</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (StudentIndexVM.StudentInfo x in Model.studenti)
+        {
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Ime</td>
+                <td>@x.Prezime</td>
+                <td>@x.BrojIndeksa</td>
+                <td>@x.Fakultet_Naziv</td>
+                <td>@x.Smjer_Naziv</td>
+                <td>@x.EctsUkupno</td>
+                <td>@x.BrojPolozenihPredmeta</td>
+                <td>
+                    @Html.ActionLink("Obriši", "Obrisi", new { studentId = x.Id }, new { @class = "btn btn-danger btn-sm" })
+                    @Html.ActionLink("Uredi", "Uredi", new { studentId = x.Id }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Detalji", "Index", "TokStudija", new { studentId = x.Id }, new { @class = "btn btn-warning btn-sm" })
+                </td>
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+        
+ <div>
+    @Html.ActionLink("Dodaj novi", "Dodaj", new { }, new { @class = "btn btn-success btn-sm" })
+</div>

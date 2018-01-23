@@ -1,0 +1,75 @@
+﻿@model MVC.Areas.ModulAdministracija.Models.PredmetUrediVM
+
+<h2>Upravljanje predmetima</h2>
+
+<div>
+    <div class="form-group">
+        <label class="control-label">Fakultet</label>
+        <input type="text" class="form-control" value="@Model.FakultetNaziv" disabled/>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Smjer</label>
+        <input type="text" class="form-control" value="@Model.SmjerNaziv" disabled/>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">NPP</label>
+        <input type="text" class="form-control" value="@Model.NppNaziv" disabled/>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("Snimi", "Predmet"))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.NppId)
+    
+    <div class="form-group">
+        <label>Fakultet</label>
+        <div>
+            @Html.TextBoxFor(model => model.FakultetNaziv, new { @class = "form-control", @disabled = "disabled" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Smjer</label>
+        <div>
+            @Html.TextBoxFor(model => model.SmjerNaziv, new { @class = "form-control", @disabled = "disabled" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>NPP</label>
+        <div>
+            @Html.TextBoxFor(model => model.NppNaziv, new {@class = "form-control", @disabled = "disabled"})
+        </div>
+    </div>
+    
+    
+    <div class="form-group">
+        <label>Godina studija</label>
+        <div>
+            @Html.DropDownListFor(model => model.GodinaStudija, Model.GodinaStudijaStavke, new {@class = "form-control"})
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label>Naziv</label>
+        <div>
+           @Html.TextBoxFor(model => model.PredmetNaziv, new {@class = "form-control"})
+        </div>
+    </div> 
+    
+    <div class="form-group">
+        <label>ECTS</label>
+        <div>
+           @Html.TextBoxFor(model => model.Ects, new {@class = "form-control"})
+        </div>
+    </div>
+
+
+
+    <input type="submit" value="Snimi" class="btn btn-danger" />
+}
+

@@ -1,0 +1,34 @@
+﻿@model eAkademija.Data.Model.Kategorija
+
+@{ 
+    Layout = null;
+}
+
+<td colspan="4">
+
+    <div id="podkategorija-new_@Model.Id">
+
+    </div>
+
+    @Ajax.ActionLink("Nova", "Add", "Podkategorija", new { Id = Model.Id }, new AjaxOptions { UpdateTargetId = "podkategorija-new_" + Model.Id }, new { @class = "btn btn-primary pull-right" })
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <td> Naziv </td>
+                <td> Akcija </td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var podkategorija in Model.Podkategorije)
+            {
+                <tr>
+                    <td> @podkategorija.Naziv </td>
+                    <td> @Ajax.ActionLink("Delete", "Delete", "Podkategorija", new { Id = podkategorija.Id }, new AjaxOptions { UpdateTargetId = "podkategorija_" + Model.Id }, new { @class = "btn btn-danger" }) </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</td>

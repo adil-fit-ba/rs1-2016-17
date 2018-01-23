@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+@model eAkademija.Web.ViewModels.Front_Kurs
+
+ @{ 
+     Layout= "~/Views/Shared/_Layout.cshtml";
+ }
+
+
+@section Jumbotron {
+    <div class="">
+    <div class="jumbotron cover jumbotron-single" id="home" style="background-image: url('@Model.KursThumbImagePutanja') ;background-repeat: no-repeat;background-size:cover;">
+
+    </div>
+     </div>
+}
+<div class="container">
+    <div class="row single-kurs-video">
+
+        @if (User.IsInRole("Instruktor") || User.IsInRole("Administrator"))
+        {
+
+           
+
+            <div class="page-header">
+                <h1>@Model.KursNaziv<!--small>Subtext for header</!--small--></h1>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1" style="padding-bottom: 20px">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="embed-responsive embed-responsive-16by9">
+                        @{ string videoPutanja = "https://www.youtube.com/embed/" + @Model.KursVideoId + "?rel=0&amp;controls=1"; }
+                        <iframe class="embed-responsive-item"
+                                src="@videoPutanja"
+                                frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1" style="padding-bottom: 20px">
+                <blockquote>
+                    @Model.KursOpis
+                </blockquote>
+            </div>
+
+
+                            }
+                            else if (User.IsInRole("Student") && Model.IsPrijavljenNaKurs)
+                            {
+
+                                Html.RenderAction("PrikaziDetalje", "Kurs", new { @area = "Student", @id = Model.Id });
+                            }
+                            else
+                            {
+
+                <div class="col-sm-9">
+                    <h1>@Html.DisplayFor(model => model.KursNaziv)</h1>
+                    <span class="label label-success">Kategorija: @Html.DisplayFor(model => model.KursKategorija)</span>
+                    <p style="margin:15px 0;">@Html.DisplayFor(model => model.KursOpis)</p>
+                    <hr />
+                    <div class="col-sm-4 single-kursa-meta ">Datum: @Model.KursDatumKreiranja.ToShortDateString()</div>
+                    <div class="col-sm-4 single-kursa-meta ">Instruktor: @Html.DisplayFor(model => model.Instruktor)</div>
+                    <div class="col-sm-4 single-kursa-meta ">
+                        Nivo:
+                        @{switch ((int)Model.KursKursNivo)
+                            {
+                                case 1:
+                                    <span class="label label-info">@Model.KursKursNivo</span>
+                                    break;
+                                case 2:
+                                    <span class="label label-success">@Model.KursKursNivo</span>
+                                    break;
+                                case 3:
+                                    <span class="label label-warning">@Model.KursKursNivo</span>
+                                    break;
+                                default:
+                                    <span class="label label-primary ">@Model.KursKursNivo</span>
+                                    break;
+                            }
+                        }
+
+                    </div>
+
+                    <hr />
+
+                </div>
+                <div class="col-sm-3">
+                    <img class="img-responsive" src="@Model.KursThumbImagePutanja" alt="">
+                    <div class="cta-button">
+
+
+                        @Html.ActionLink("Prijavi se na kurs", "Prijava", "Kurs", new { area = "Student", kursId = Model.Id, userId = User.Identity.GetUserId() }, new { @class = "btn btn-lg btn-primary btn-block" })
+
+                    </div>
+                </div>
+                }
+            </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@using MVC.Areas.ModulAdministracija.Models
+@using MVC.Models
+@model AkademskaGodinaIndexVM
+
+
+<h2>Upravljanje akademskim godinama</h2>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Opis</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AkademskaGodinaIndexVM.AkademskaGodinaInfo x in Model.AkademskeGodine)
+        {
+            <tr>
+                <td>@x.Opis</td>
+                <td>
+                    @Html.ActionLink("Obriši", "Obrisi", new { id = x.Id }, new { @class = "btn btn-danger btn-sm" })
+                    @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Dodaj novu", "Dodaj", new { }, new { @class = "btn btn-success btn-sm" })
+</div>

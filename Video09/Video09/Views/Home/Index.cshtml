@@ -1,0 +1,37 @@
+﻿
+@model MVC.Models.Korisnik
+@{
+    const string cssBtn = "btn btn-default btn-block";
+}
+
+
+<div class="container" style="width: 300px">
+    <h4>Odabirite korisničku ulogu</h4>
+   
+
+    @if (Model.Administrator != null)
+    {
+        <a href="/ModulAdministracija/Home" class="@cssBtn">Administrator</a>
+    }
+
+    @if (Model.Nastavnik != null)
+    {
+        <a href="/ModulEdukatori/Home" class="@cssBtn">Edukator</a>
+    }
+
+    @if (Model.Referent != null)
+    {
+        <a href="/ModulStudentskaSluzba/Home" class="@cssBtn">Studentska služba</a>
+    }
+
+    @if (Model.Student != null)
+    {
+        <a href="/ModulStudenti/Home" class="@cssBtn">Studenti</a>
+    }
+
+    <a href="/Login/Logout">Logout</a>
+</div>
+
+
+
+

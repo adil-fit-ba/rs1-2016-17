@@ -1,0 +1,40 @@
+﻿@using MVC.Areas.ModulAdministracija.Models
+@model MVC.Areas.ModulAdministracija.Models.SmjerIndexVM
+
+
+<h2>Upravljanje smjerovima</h2>
+
+<div class="form-group">
+    <label class="control-label">Fakultet</label>
+    <input type="text" class="form-control" value="@Model.FakultetNaziv" disabled/>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+         <tr>
+            <th>Naziv smjera</th>
+            <th>Broj studenata</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (SmjerIndexVM.SmjerInfo x in Model.Smjerovi)
+        {
+            <tr>
+                <td>@x.SmjerNaziv</td>
+                <td>@x.BrojStudenata</td>
+                <td>
+                    @Html.ActionLink("Obriši", "Obrisi", new {smjerId = x.Id}, new {@class = "btn btn-danger btn-sm"})
+                    @Html.ActionLink("Uredi", "Uredi", new {smjerId = x.Id}, new {@class = "btn btn-info btn-sm"})
+                    @Html.ActionLink("NPP", "Index", "Npp", new {smjerId = x.Id}, new {@class = "btn btn-warning btn-sm"})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Dodaj novi", "Dodaj", new { fakultetId = Model.FakultetId }, new { @class = "btn btn-success btn-sm" })
+</div>

@@ -1,0 +1,82 @@
+﻿@using eAkademija.Web.Areas.Instruktor.ViewModels
+@model eAkademija.Web.Areas.Instruktor.ViewModels.StudentZadacaIndexVM
+
+@{
+    ViewBag.Title = "Pregled zadaće";
+}
+
+<div id="ContentWrapper">
+
+    <ol class="breadcrumb">
+        <li><a href="~/">Home</a></li>
+        <li><a href="~/Instruktor/Kurs/@Model.StudentZadace.FirstOrDefault().StudentZadacaKursId">Kurs</a></li>
+        <li class="active">Zadaća</li>
+    </ol>
+
+    <div class="page-header">
+        <h1>Pregled zadaće</h1>
+    </div>
+
+
+    <p>
+        @Html.ActionLink("<< Nazad na Kurs", "Pregled", "Kurs", 
+       new { @id = Model.StudentZadace.FirstOrDefault().StudentZadacaKursId }, 
+       new { @class = "btn btn-sm btn-danger" })
+    </p>
+
+
+    <div id="ZadacaWrapper">
+            
+        @{
+            foreach (StudentZadacaRow item in Model.StudentZadace)
+            {
+                bool jeOcijenjena = (item.StudentZadacaPoeni > -1 ? true : false);
+                bool jePredana = (item.StudentZadacaRjesenje.Length > 0 ? true : false);
+
+                string panelCtxStateClass = (jeOcijenjena ? "success" : (jePredana ? "warning" : "danger"));
+                string btnOcijeniTxtLabel = (jeOcijenjena ? "Izmijeni" : "Ocijeni");
+
+                <div id="@item.StudentZadacaId" class="panel panel-@panelCtxStateClass">
+
+                    @if (jePredana)
+                    {
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Ime i prezime: @item.StudentZadacaImeStudenta <span style="font-size: 0.7em">@item.StudentZadacaDatumNapisan</span>
+                                </div>
+                                <div class="col-md-7 text-right">
+                                    <div id="DaSpace-@item.StudentZadacaId">
+
+                                        @if (jeOcijenjena)
+                                        {
+                                            <span>Bodova: @item.StudentZadacaPoeni / @item.StudentZadacaUkupnoBodova</span>
+                                        }
+
+                                        <span> &nbsp;</span>
+
+                                        @Ajax.ActionLink(@btnOcijeniTxtLabel, "Ocijeni", "StudentZadaca", new { @id = @item.StudentZadacaId }, new AjaxOptions { UpdateTargetId = "DaSpace-" + @item.StudentZadacaId }, new { @class = "btn btn-sm btn-warning" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="panel-body">
+                        @if (jePredana) { 
+                            @item.StudentZadacaRjesenje
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                Student <b>@item.StudentZadacaImeStudenta</b> još nije predao zadaću!
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+</div>

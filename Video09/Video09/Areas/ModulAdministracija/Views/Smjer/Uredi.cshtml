@@ -1,0 +1,24 @@
+﻿@model MVC.Areas.ModulAdministracija.Models.SmjerUrediVM
+<h2>Upravljanje smjerovima</h2>
+
+<div class="form-group">
+    <label class="control-label">Fakultet</label>
+    <input type="text" class="form-control" value="@Model.FakultetNaziv" disabled/>
+</div>
+
+@using (Html.BeginForm("Snimi", "Smjer"))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.FakultetId)
+    
+    
+    <div class="form-group">
+        <label>Naziv</label>
+        <div>
+           @Html.TextBoxFor(model => model.SmjerNaziv, new {@class = "form-control"})
+        </div>
+    </div>
+    
+    <input type="submit" value="Snimi" class="btn btn-danger" />
+}
+

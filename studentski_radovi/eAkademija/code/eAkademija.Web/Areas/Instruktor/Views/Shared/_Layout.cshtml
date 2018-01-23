@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html>
+@Html.Partial("~/Views/Partial/Header.cshtml")
+<body class="instruktor">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("eAkademija", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Admin">ADMIN</a></li>
+                    <li><a href="/Instruktor/Home">INSTRUKTOR</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="#">Dobrodošli, <b><i>@User.Identity.Name</i></b></a></li>
+
+                    <li>
+                        @if (User.Identity.Name != null && User.Identity.Name != "")
+                        {
+                            <a href="/Account/Logout">Odjava</a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Login">Prijava</a>
+                        }
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+
+        @{ 
+            string instruktorId = User.Identity.GetUserId();
+        }
+
+        <div class="row toolbar-top">
+            <div class="col-sm-10 col-sm-offset-1 text-right">
+                @Html.ActionLink("Dodaj kurs", "Dodaj", "Kurs", null, new { @class = "btn btn-sm btn-success" })
+                <a href="/Reports/Instruktor/KurseviByInstruktor.aspx?instruktorId=@instruktorId" target="_blank" class="btn btn-sm btn-warning">Kreiraj izvještaj o Kursevima</a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-10 col-sm-offset-1">
+                @RenderBody()
+            </div>
+
+        </div>
+
+        <hr />
+
+        <footer class="row">
+            <p>&copy; @DateTime.Now.Year - eAkademija</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        (
+            function (jQuery) {
+                $(document).ready(function (event) {
+                    $(document).on('click input', 'input.has-picker', function (e) {
+                        var jQuerythis = $(this);
+                        jQuerythis.prop('type', 'text').datepicker({
+                            showOtherMonths: true,
+                            selectOtherMonths: true,
+                            showButtonPanel: false,
+                            changeMonth: true,
+                            changeYear: false,
+                            dateFormat: 'dd.mm.yy',
+                            showWeek: true,
+                            firstDay: 1
+                        });
+
+                        setTimeout(function () {
+                            jQuerythis.datepicker('show');
+                        }, 1);
+                    });
+                });
+            })(jQuery, jQuery.ui);
+    });
+</script>

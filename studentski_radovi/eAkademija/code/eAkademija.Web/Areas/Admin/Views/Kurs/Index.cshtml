@@ -1,0 +1,66 @@
+﻿
+@using eAkademija.Web.Areas.Admin.Models
+@using eAkademija.Data.Enums
+@model  List<KursViewModel>
+
+<div id="detaljiAjax">
+
+</div>
+
+<div class="panel panel-default" style="margin-top: 20px;">
+
+    <div class="panel panel-heading row">
+        <h5 class="col-lg-3" style="text-align: center;"> Lista kurseva </h5>
+
+        <form method="get" action="/Admin/Kurs/Index" class="col-lg-9">
+            <div class="row"> 
+                <input type="text" name="naziv" placeholder="C++ for beginners .." class="form-control col-lg-3" style="width: 25%; margin-right: 15px;" />
+                <select name="arhiv_opcija" class="form-control col-lg-3" style="width: 25%;  margin-right: 15px;">
+                    <option value="" selected> Odaberite Status Kursa </option>
+                    <option value="0" @(ViewBag.ArhivOpcija == KursStatus.ACTIVE ? "selected" : "")> Aktivni Kursevi </option>
+                    <option value="1" @(ViewBag.ArhivOpcija == KursStatus.FLAGGED_FOR_ARCHIVING ? "selected" : "")> Kursevi Za Arhivu </option>
+                    <option value="2" @(ViewBag.ArhivOpcija == KursStatus.ARCHIVED ? "selected" : "")> Arhivirani Kursevi </option>
+                </select>
+
+                <button type="submit" class="btn btn-default"> Pretraga </button>
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <td> Id </td>
+                <td> Naziv </td>
+                <td> Datum Kreiranja </td>
+                <td> Akcija </td>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.Id </td>
+                    <td> @item.Name </td>
+                    <td> @item.DatumKreiranja.ToString("dd/MM/yyyy") </td>
+                    <td>
+                        @Ajax.ActionLink("Detalji", "Show", new { kursId = item.Id }, new AjaxOptions {UpdateTargetId = "detaljiAjax"}, new {@class = "btn btn-success" })
+                        @if(ViewBag.ArhivOpcija == KursStatus.FLAGGED_FOR_ARCHIVING)
+                        {
+                           @Html.ActionLink("Arhiviraj", "Archive", new { kursId = item.Id }, new { @class = "btn btn-danger" })
+                        }
+                        
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+

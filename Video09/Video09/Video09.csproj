@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4042E7FE-51FC-4239-8556-6BA83D07A914}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVC</RootNamespace>
+    <AssemblyName>MVC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Pattern.png" />
+    <Content Include="Content\Site.css" />
+    <Content Include="DB.sql" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\ModulAdministracija\Views\Fakultet\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Fakultet\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Predaje\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Smjer\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Smjer\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\web.config" />
+    <Content Include="Areas\ModulAdministracija\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ModulEdukatori\Views\web.config" />
+    <Content Include="Areas\ModulStudenti\Views\web.config" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\Student\Index.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\Student\Uredi.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\web.config" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Home\Index.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\Home\Index.cshtml" />
+    <Content Include="Areas\ModulStudenti\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ModulStudenti\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ModulStudenti\Views\Home\Index.cshtml" />
+    <Content Include="Areas\ModulEdukatori\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ModulEdukatori\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ModulEdukatori\Views\Home\Index.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\TokStudija\Index.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\TokStudija\Index\OpsteInfo.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\TokStudija\Index\UpisaneGodine.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\TokStudija\Index\Uplate.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\TokStudija\Index\UpisGodineDetaljno.cshtml" />
+    <Content Include="Areas\ModulStudentskaSluzba\Views\TokStudija\Index\SlusaPredmete.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\AkademskaGodina\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\AkademskaGodina\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Npp\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Npp\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Predmet\Index.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Predmet\Uredi.cshtml" />
+    <Content Include="Areas\ModulAdministracija\Views\Predaje\Uredi.cshtml" />
+    <None Include="Areas\ModulAdministracija\Views\TestEditor\Index.cshtml" />
+    <None Include="Areas\ModulAdministracija\Views\TestEditor\Snimljeno.cshtml" />
+    <None Include="Properties\PublishProfiles\si000.app.fit.ba - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\AkademskaGodinaController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\KorisnikController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\FakultetController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\HomeController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\PredmetController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\PredajeController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\NppController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\SmjerController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Controllers\TestEditorController.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\AkademskaGodinaIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\AkademskaGodinaUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\KorisikIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\KorisnikUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\PredmetIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\PredmetUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\PredajeIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\PredajeUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\FakultetIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\NppIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\SmjerIndexVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\FakultetUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\NppUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\Models\SmjerUrediVM.cs" />
+    <Compile Include="Areas\ModulAdministracija\ModulAdministracijaAreaRegistration.cs" />
+    <Compile Include="Areas\ModulEdukatori\Controllers\HomeController.cs" />
+    <Compile Include="Areas\ModulEdukatori\ModulEdukatoriAreaRegistration.cs" />
+    <Compile Include="Areas\ModulStudenti\Controllers\HomeController.cs" />
+    <Compile Include="Areas\ModulStudenti\ModulStudentiAreaRegistration.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Controllers\HomeController.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Controllers\StudentController.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Controllers\TokStudijaController.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\StudentUrediVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\StudentIndexVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\TokStudijaIndexVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\TokStudija\UplataVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\TokStudija\SlusaPredmeteVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\TokStudija\UpisaneGodineVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\TokStudija\OpsteInfoVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\Models\UpisGodineDetaljnoVM.cs" />
+    <Compile Include="Areas\ModulStudentskaSluzba\ModulStudentskaSluzbaAreaRegistration.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAL\MojContext.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Autentifikacija.cs" />
+    <Compile Include="Helper\Autorizacija.cs" />
+    <Compile Include="Helper\IEntity.cs" />
+    <Compile Include="Helper\MyExtensions.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\AkademskaGodina.cs" />
+    <Compile Include="Models\Fakultet.cs" />
+    <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\Nastavnik.cs" />
+    <Compile Include="Models\NPP.cs" />
+    <Compile Include="Models\Opstina.cs" />
+    <Compile Include="Models\Predaje.cs" />
+    <Compile Include="Models\Predmet.cs" />
+    <Compile Include="Models\PrijavaIspita.cs" />
+    <Compile Include="Models\Referent.cs" />
+    <Compile Include="Models\Regija.cs" />
+    <Compile Include="Models\SlusaPredmet.cs" />
+    <Compile Include="Models\Uplata.cs" />
+    <Compile Include="Models\Smjer.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\UpisGodine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Views\Shared\_NavBarLogiraniKorisnik.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\ModulEdukatori\Models\" />
+    <Folder Include="Areas\ModulStudenti\Models\" />
+    <Folder Include="Views\Student\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54740</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54740/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

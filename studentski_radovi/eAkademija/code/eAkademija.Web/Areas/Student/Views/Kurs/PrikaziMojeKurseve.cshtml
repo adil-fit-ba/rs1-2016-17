@@ -1,0 +1,112 @@
+﻿@using eAkademija.Web.ViewModels;
+@using Microsoft.AspNet.Identity
+
+@model List<eAkademija.Web.ViewModels.Front_Kurs>
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string studentId = User.Identity.GetUserId();
+
+}
+
+
+@{ int KursBroj = 0; }
+
+<div class="container body-content" style="margin-top:100px;">
+
+    @if (Model.Any())
+    {
+
+        <div class="row kurs-front-title-blocks">
+
+            <div class="col-lg-9">
+                <h3>Kursevi na koji ste se prijavili</h3>
+            </div>
+    
+          
+
+            <div class="col-sm-3 text-right" style="margin-top:10px;">
+                    <a href="/Reports/Student/MojiKurseviReport.aspx?korisnikId=@studentId" target="_blank" class="btn btn-sm btn-warning">Kreiraj izvještaj o Kursevima</a>
+            </div>
+            <hr />
+
+        </div>
+
+        <div class="row kurs-row">
+            @foreach (Front_Kurs item in Model)
+            {
+ 
+                <div class="col-xs-6 col-sm-3" style="margin-bottom: 20px;">
+                    <div id="kurs-response-@item.Id" style="display: none;">
+                        <div class="alert alert-success" role="alert"> </div>
+                    </div>
+                    <div id="favorit-@item.Id">
+                        <article class="kurs-front" style="padding-top:10px;">
+                            <a style="text-decoration: none;" href="@Url.Action("SingleKurs", "FrontKurs", new { area = "", ID = item.Id })">
+
+                                <div class="image aspect-16by9">
+                                    <img class="img-responsive" src="@item.KursThumbImagePutanja" alt="">
+
+                                </div>
+                            </a>
+                            <div class="kurs-front-sadrzaj">
+                                <h5 class="kurs-front-title">@item.KursNaziv</h5>
+                                <div class="kurs-front-instruktor">
+                                    <span class="db" data-purpose="course-card-instructor-titles">Author: @item.Instruktor</span>
+                                </div>
+                                <div class="description">
+
+                                    <div class="text-center">
+
+
+
+                                        @using (Ajax.BeginForm("OdjaviKurs", "Kurs", new { @area = "Student" }, new AjaxOptions { UpdateTargetId = "favorit-" + @item.Id, OnSuccess = "OnMojKursRemoveSuccess(" + @item.Id + ")", HttpMethod = "POST" }, new { id = "favorit-button-add" }))
+                                        {
+                                            @Html.Hidden("studentKursId", item.StudentKursId)
+                                            @Html.Hidden("mojikursevi", true)
+                                            @Html.AntiForgeryToken();
+                                            <button type="submit" class="btn btn-sm btn-danger text-right" id="btn-fav">
+                                                <span class="fa fa-times" aria-hidden="true"></span> Odjavi kurs
+                                            </button>
+                                        }
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+                    </div>
+
+                </div>
+
+                                            KursBroj++;
+                                            if (KursBroj > 0 && KursBroj % 4 == 0)
+                                            {
+                                                <div class="clearfix"></div>
+                                                }
+                                            }
+        </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="kurs-front-title-blocks">
+
+                                                    <h2>Trenutno niste prijavljeni ni na jedan kurs</h2>
+                                                    <hr />
+                                                </div>
+                                            }
+
+    <hr />
+
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+﻿
+@using eAkademija.Web.Models
+@model ShowViewModel
+
+@{ 
+    Layout = null;
+}
+
+<div class="row" style="margin-bottom: 20px;">
+
+    <div class="col-lg-3"></div>
+
+    <div class="col-lg-6" style="background-color: lightgray; border-radius:2px;">
+
+        <h3> Detalji o korisniku </h3>
+
+
+        <h5> Osnovne informacije </h5>
+
+        <p> Ime: @Model.Ime </p>
+        <p> Prezime: @Model.Prezime </p>
+        <p> Username: @Model.Username </p>
+        <p> Grad: @Model.Grad </p>
+        <p> Tip korisnika: @Model.Tip </p>
+        <p> Email: @Model.Email </p>
+
+        @if(Model.Tip == "Student")
+        {
+            <h4> Kursevi na koje ide student @Model.Ime @Model.Prezime </h4>
+
+        }else if(Model.Tip == "Instruktor")
+        {
+            <h4> Kursevi koje drzi instruktor @Model.Ime @Model.Prezime </h4>
+        }
+
+        <ul>
+            @foreach (var item in Model.Kursevi)
+            {
+                <li>
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-1" class="collapsed">
+                        @item.Naziv
+                    </a>
+                    <div id="collapse-1" class="panel-collapse collapse" role="tabpanel" style="height: 0px;">
+                        <div class="panel-body" style="text-align: center;">
+                            <p style="border-bottom: 2px solid white;"> Detalji Kursa </p>
+                            <p> Datum Kreiranja Kursa: @item.DatumKreiranja.ToString("dd-MM-yyyy") </p>
+                            <p> Opis Kursa: </p>
+                            <p> @item.Opis </p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+       
+
+    </div>
+
+    <div class="col-lg-3">
+        @Ajax.ActionLink("X", "EmptyView", null, new AjaxOptions { UpdateTargetId = "ajaxDetalji" }, new { @class = "btn btn-danger", style = "margin-top: 10px;" })
+    </div>
+    
+
+</div>
+
+

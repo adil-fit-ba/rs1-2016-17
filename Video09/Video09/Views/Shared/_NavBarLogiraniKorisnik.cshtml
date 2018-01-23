@@ -1,0 +1,30 @@
+﻿@using MVC.Helper
+@using MVC.Models
+@{
+    Korisnik korisnik = Autentifikacija.GetLogiraniKorisnik(Context);
+}
+
+<li class="dropdown">
+    
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@korisnik.FullName <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        @if (korisnik.Administrator != null)
+        {
+            <li><a href="/ModulAdministracija/Home">Administracija</a></li>
+        }
+        @if (korisnik.Nastavnik != null)
+        {
+            <li><a href="/ModulEdukatori/Home">Edukator</a></li>
+        }
+        @if (korisnik.Referent != null)
+        {
+            <li><a href="/ModulStudentskaSluzba/Home">Studentska služba</a></li>
+        }
+        @if (korisnik.Student != null)
+        {
+            <li><a href="/ModulStudenti/Home">Studenti</a></li>
+        }
+        <li class="divider"></li>
+        <li>@Html.ActionLink("Logout", "Logout", "Login", new {area = ""}, new {})</li>
+    </ul>
+    </li>

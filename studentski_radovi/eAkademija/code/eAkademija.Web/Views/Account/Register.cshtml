@@ -1,0 +1,117 @@
+﻿@model eAkademija.Web.Models.RegisterModel
+@using eAkademija.Data.Model
+
+@{
+    ViewBag.Title = "Registracija";
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Student",
+        Value = "Student",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Instruktor",
+        Value = "Instruktor",
+    });
+
+    IEnumerable<Grad> gradovi = (IEnumerable<Grad>) ViewBag.gradovi;
+
+    List<SelectListItem> gradoviList = new List<SelectListItem>();
+    foreach(var item in gradovi)
+    {
+        gradoviList.Add(new SelectListItem
+        {
+            Text = item.Naziv,
+            Value = item.Id.ToString()
+        });
+    }
+}
+
+<div class="row" style="padding:50px 0;">
+
+    <div class="container" id="register-ajax">
+
+        <h2>Register</h2>
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { autocomplete = "off", enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label> Ime </label>
+                @Html.TextBoxFor(x => x.Ime, new { @class = "form-control" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.Ime)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label> Prezime </label>
+                @Html.TextBoxFor(x => x.Prezime, new { @class = "form-control" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.Prezime)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label> Username </label>
+                @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.Username)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label> Email </label>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", autocomplete = "off" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label> Password </label>
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control", autocomplete = "new-password" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.Password)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input name="profile_picture" type="file" class="form-control" />
+            </div>
+
+            <div class="form-group" id="select-lista">
+                <label>Zelim biti </label>
+                @Html.DropDownListFor(x => x.Tip, listItems, new { @class = "form-control" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.Tip)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label> Grad </label>
+                @Html.DropDownListFor(x => x.GradId, gradoviList, new { @class = "form-control" })
+                <div style="color: red;">
+                    @Html.ValidationMessageFor(x => x.GradId)
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary"> Register </button>
+        }
+
+    </div>
+</div>
+<script type="text/javascript">
+
+
+
+
+    var val = GetURLParameter('zelimbiti'); 
+
+    if(val != null || val != ""){
+    $('#select-lista select').val(val).attr("selected", "selected"); 
+    }
+
+</script>

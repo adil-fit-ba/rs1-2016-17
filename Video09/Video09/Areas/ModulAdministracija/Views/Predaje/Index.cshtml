@@ -1,0 +1,56 @@
+﻿@using MVC.Areas.ModulAdministracija.Models
+@model MVC.Areas.ModulAdministracija.Models.PredajeIndexVM
+
+@{
+    Layout = null;
+}
+<h3>@Model.PredmetNaziv</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nastavnik</th>
+        <th>AkademskaGodina</th>
+        <th>Akcija</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (PredajeIndexVM.PredajeInfo x in Model.PredajeList)
+    {
+        <tr>
+            <td>@x.Nastavnik</td>
+            <td>@x.AkademskaGodina</td>
+            <td>
+                @using (Ajax.BeginForm("Obrisi", "Predaje", new AjaxOptions() { UpdateTargetId = "predavaci-output" }))
+                {
+                    @Html.Hidden("predajeId", x.Id)
+                    <input type="submit" value="Obriši" class="btn btn-danger btn-sm" />
+                }
+
+              
+
+
+                @using (Ajax.BeginForm("Uredi", "Predaje", new AjaxOptions() { UpdateTargetId = "predavaci-output" }))
+                {
+                    @Html.Hidden("predajeId", x.Id)
+                    <input type="submit" value="Uredi" class="btn btn-info btn-sm" />
+                }
+             
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@using (Ajax.BeginForm("Dodaj", "Predaje", new AjaxOptions() { UpdateTargetId = "predavaci-output" }))
+{
+    @Html.Hidden("predmetId", Model.PredmetId)
+    <input type="submit" value="Dodaj novi" class="btn btn-success btn-sm" />
+}
+
+
+
+
+

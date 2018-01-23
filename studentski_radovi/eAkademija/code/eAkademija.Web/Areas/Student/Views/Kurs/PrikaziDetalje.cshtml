@@ -1,0 +1,174 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+
+@model eAkademija.Web.ViewModels.Front_Kurs
+
+@{   Layout = null; }
+
+
+<div class="row page-content">
+
+    <div class="col-md-12">
+
+
+
+        <div class="page-header">
+            <h1>@Model.KursNaziv<!--small>Subtext for header</!--small--></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="padding-bottom: 20px">
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    @{ string videoPutanja = "https://www.youtube.com/embed/" + @Model.KursVideoId + "?rel=0&amp;controls=1"; }
+                    <iframe class="embed-responsive-item"
+                            src="@videoPutanja"
+                            frameborder="0"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10 col-md-offset-1" style="padding-bottom: 20px">
+            <blockquote>
+                @Model.KursOpis
+            </blockquote>
+
+            <div class="well well-sm"> 
+                <div id="statistika">
+                    @Html.Action("PrikaziStatistiku", "Kurs", new { area = "Student", @kursId = Model.Id })
+                </div>
+                <button class="btn btn-primary" type="button">
+                    Nivo <span class="badge">@Model.KursKursNivo</span>
+                </button>
+                <button class="btn btn-info" type="button">
+                    Polaznika  <span class="badge">@Model.KursPolazniciCount</span>
+                </button>
+            </div>
+
+            <div class="row">
+                <hr />
+                <div id="response-rating" style="display: none;">
+                    <div class="alert alert-success" role="alert"></div>
+                </div>
+                <div id="response-favorit" style="display: none;">
+                    <div class="alert alert-success" role="alert"></div>
+                </div>
+                <div class="col-md-6 text-left">
+
+              
+
+                 
+                    <div id="star-rating">
+
+
+                        @if (Model.StudentOcjena == null)
+                        {
+                            <p>Kako ocjenujete ovaj kurs? Koliko zvjezdica je zaslužio?</p>
+                        }
+                        else
+                        {
+                            <p>Vaša ocjena je: </p>
+                        }
+
+                        <a href="/Student/Kurs/OcjeniKurs?kursId=@(Model.Id)&ocjena=1" class="star" data-ajax="true" data-ajax-mode="replace" data-ajax-failure="OnOcjenaFailure" data-ajax-method="POST" data-ajax-success="OnOcjenaSuccess"data-ajax-complete="OnOcjenaComplete" data-ajax-com data-ajax-update="#statistika" id="1">
+                            <span class="fa fa-star checked"></span>
+                        </a>
+                        <a href="/Student/Kurs/OcjeniKurs?kursId=@(Model.Id)&ocjena=2" class="star" data-ajax="true" data-ajax-mode="replace" data-ajax-success="OnOcjenaSuccess" data-ajax-failure="OnOcjenaFailure" data-ajax-complete="OnOcjenaComplete" data-ajax-update="#statistika" id="2">
+                            <span class="fa fa-star @(Model.StudentOcjena>1?"checked":"")"></span>
+                        </a>
+                        <a href="/Student/Kurs/OcjeniKurs?kursId=@(Model.Id)&ocjena=3" class="star" data-ajax="true" data-ajax-mode="replace" data-ajax-success="OnOcjenaSuccess" data-ajax-failure="OnOcjenaFailure" data-ajax-complete="OnOcjenaComplete" data-ajax-update="#statistika" id="3">
+                            <span class="fa fa-star @(Model.StudentOcjena>2?"checked":"")"></span>
+                        </a>
+                        <a href="/Student/Kurs/OcjeniKurs?kursId=@(Model.Id)&ocjena=4" class="star" data-ajax="true" data-ajax-mode="replace" data-ajax-success="OnOcjenaSuccess" data-ajax-failure="OnOcjenaFailure" data-ajax-complete="OnOcjenaComplete" data-ajax-update="#statistika" id="4">
+                            <span class="fa fa-star @(Model.StudentOcjena>3?"checked":"") "></span>
+                        </a>
+                        <a href="/Student/Kurs/OcjeniKurs?kursId=@(Model.Id)&ocjena=5" class="star" data-ajax="true" data-ajax-mode="replace" data-ajax-success="OnOcjenaSuccess"  data-ajax-failure="OnOcjenaFailure" data-ajax-complete="OnOcjenaComplete" data-ajax-update="#statistika" id="5">
+                            <span class="fa fa-star @(Model.StudentOcjena>4?"checked":"")"></span>
+                        </a>
+
+                    
+                    </div>
+
+                
+                
+                </div>
+
+
+
+
+                <div class="col-md-6 text-right">
+                    <div id="favorit" style="margin-top:20px;">
+                       
+                        @if (Model.JeUFavoritima.HasValue)
+                        {
+                            if ((bool)!Model.JeUFavoritima)
+                            {
+                                using (Ajax.BeginForm("DodajFavorit", "Kurs", new { @area = "Student" }, new AjaxOptions { OnSuccess = "OnFavoriteAddedSuccess", HttpMethod = "POST" }, new { id = "favorit-button-add" }))
+                                {
+                                    @Html.AntiForgeryToken();
+                                    @Html.Hidden("StudentKursId", Model.StudentKursId)
+                                    <button type="submit" class="btn btn-sm btn-info text-right" id="btn-fav">
+                                        <span class="fa fa-heart" aria-hidden="true"></span> Dodaj u favorite
+                                    </button>
+                                }
+                            }
+                        }
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" style="padding:0 10px;">
+        <div class="col-md-12">
+
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#homeworks" aria-controls="zadace" role="tab" data-toggle="tab">Zadaće</a>
+                </li>
+                <li role="presentation">
+                    <a href="#pitanja" aria-controls="profile" role="tab" data-toggle="tab">Pitanja i Odgovori </a>
+                </li>
+            </ul>
+
+
+            <div class="tab-content">
+
+                <div role="tabpanel" class="tab-pane fade in active" id="homeworks">
+
+
+
+                    <div id="KursZadace">
+                        @Html.Action("Index", "Zadaca", new { area = "Student", @kursId = Model.Id })
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="pitanja">
+                    @Html.Action("PostaviPitanje", "PitanjeOdgovor", new { area = "Student", @kursId = Model.Id, @studentID = User.Identity.GetUserId() })
+                    @Html.Action("Index", "PitanjeOdgovor", new { area = "Student", @kursId = Model.Id })
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+
+        @using (Html.BeginForm("OdjaviKurs", "Kurs", new { @area = "Student" }))
+        {
+        @Html.AntiForgeryToken();
+        @Html.Hidden("studentKursId", Model.StudentKursId)
+
+        <button type="submit" class="btn btn-lg btn-danger btn-block" id="btn-fav">
+            <span class="fa fa-times " aria-hidden="true"></span> Odjavi kurs
+        </button>
+        }
+    </div>
+
+</div>
+

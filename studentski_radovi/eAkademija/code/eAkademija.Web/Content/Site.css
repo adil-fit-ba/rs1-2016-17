@@ -1,0 +1,485 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+.footer-bg {
+    background: linear-gradient(-45deg,#ec5252,#6e1a52);
+    padding: 25px 0;
+}
+
+    .footer-bg p {
+        color: white;
+    }
+
+.footer-heading {
+    color: white;
+    font-size: 23px;
+}
+
+/*
+    Menu Start
+
+*/
+
+
+
+
+.dropdown-submenu {
+    position: relative;
+}
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+
+
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #cccccc !important;
+}
+.navbar-inverse {
+    background-color: #2A2B2A !important;
+    border-color: #2A2B2A !important;
+}
+
+/*
+    Menu End
+
+*/
+
+/*
+    testimonial start
+*/
+
+.card-block .fa-quote-right {
+    font-size: 36px;
+    color: #ec5252;
+}
+
+.card-block p {
+    margin-top:20px;
+    font-size: 23px;
+    
+}
+
+.card-block span {
+    color: #6e1a52;
+}
+
+/*
+    testimonial end
+*/
+
+.form-control-search {
+    display: inline-block !important; 
+    width: 80% !important;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+.ui-autocomplete {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    z-index: 2000;
+    float: left;
+    display: none;
+    min-width: 160px;
+    color:#505763 !important;
+    _width: 160px;
+    padding: 4px 0;
+    margin: 2px 0 0 0;
+    list-style: none;
+    background-color: #ffffff;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+}
+
+    .ui-autocomplete .ui-menu-item > a.ui-corner-all {
+        display: block;
+        padding: 3px 15px;
+        clear: both;
+        font-weight: normal;
+        line-height: 18px;
+        color: #555555;
+        white-space: nowrap;
+    }
+
+.ui-menu .ui-widget .ui-widget-content .ui-autocomplete .ui-front{
+    color:#555555 !important;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dropdown-menu-login {
+    padding: 10px !important;
+    min-width: 260px !important;
+}
+
+
+.jumbo-front {
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.jumbotron {
+    border-bottom: 6px solid #ec5252 !important;
+}
+
+.navbar .avatar {
+    margin-top: -5px;
+    margin-right: 10px;
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+
+@media only screen and (max-width: 768px){
+
+    .jumbo-front {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+}
+
+.kurs-pitanja-box {
+    background-color: #fff;
+    border-bottom: 2px solid #f2f3f5;
+    padding: 30px;
+    border-top: 1px solid #f2f3f5;
+}
+
+
+
+.ajax-loader-modal {
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    -moz-opacity: 0.8;
+    display: none;
+}
+
+.ajax-center-modal {
+    z-index: 1000;
+    margin: 50px auto;
+    padding: 10px;
+    width: 130px;
+    background-color: White;
+    border-radius: 10px;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -moz-opacity: 1;
+}
+
+.kurs-front {
+    box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    height:320px;
+}
+
+.kurs-front-sadrzaj {
+    padding: 15px 10px 0 15px;
+}
+
+.kurs-front-title {
+    -webkit-line-clamp: 2;
+    -moz-line-clamp: 2;
+    -ms-line-clamp: 2;
+    -o-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -o-box-orient: vertical;
+    box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-weight: 600;
+    height: 36px;
+    min-height: 42px;
+    font-size: 15px;
+    color: #29303b;
+    margin-bottom: 10px;
+
+}
+
+.kurs-front-instruktor {
+    -webkit-line-clamp: 2;
+    -moz-line-clamp: 2;
+    -ms-line-clamp: 2;
+    -o-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -o-box-orient: vertical;
+    box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-weight: 600;
+    height: 21px;
+    min-height: 21px;
+    font-size: 12px;
+    color: #686f7a;
+    margin-bottom: 10px;
+}
+
+.kurs-front-title-blocks h2 {
+    font-size: 30px;
+    color: #505763;
+    margin: 0 0 20px;
+}
+.kurs-front-title-blocks h3 {
+    font-size: 20px;
+    color: #505763;
+    margin:20px 0;
+}
+
+.cta-block {
+    text-align: center;
+    padding: 28px 30px;
+    max-width: 420px;
+    font-size:16px;
+}
+
+.cta-button {
+    margin: 20px 0;
+}
+
+.cta-student-block {
+    border-right: 1px solid #dedfe0;
+}
+
+.cta-row {
+    padding: 5% 0;
+    background: #ecf0f1;
+}
+.db {
+    display: block;
+}
+
+.jumbotron-single {
+
+    padding:120px 0 !important;
+}
+
+.checked {
+    color: orange;
+}
+
+.single-kurs {
+    margin:100px 0;
+}
+
+.single-kurs-video {
+    margin-top: 0;
+    margin-bottom: 100px;
+    padding:0 10px;
+}
+.single-kursa-meta {
+    font-size:16px;
+}
+
+#star-rating a:focus, a:hover {
+    text-decoration: none !important;
+    color: orange !important;
+}
+
+@media only screen and (max-width: 366px) {
+
+    .kurs-row .col-xs-6 {
+        width: 100%;
+    }
+
+    .jumbotron-single {
+        padding: 40px 0 !important;
+    }
+
+}
+
+
+.register-success{
+    font-size: 20em;
+    color: #28cf28;
+}
+
+
+.alert-responsse {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+
+@media only screen and (max-width: 767px) {
+
+ 
+    .cta-student-block {
+        border-bottom: 1px solid #dedfe0;
+        border-right: none;
+    }
+}
+
+
+
+
+
+
+
+/** INSTRUKTOR **/
+.instruktor .navbar.navbar-inverse {
+    background-color: #407ead
+}
+
+.instruktor .navbar.navbar-inverse ul.navbar-nav li a,
+.instruktor .navbar.navbar-inverse a.navbar-brand {
+    color: #fff !important;
+}
+
+.instruktor .body-content { padding-top: 20px; }
+
+.instruktor .row.toolbar-top { padding-bottom: 20px; }
+
+.instruktor .page-content #KursZadace {
+    clear: left;
+    padding: 5px;
+    background-color: #edecec;
+}
+
+.instruktor .media { padding-bottom: 20px; }
+.instruktor .media.polaznik-stavka h4 { color: #1064a2; margin-top: 0px !important; }
+
+.instruktor .media.pitanjeodgovor-stavka h4.media-heading {
+    font-size: 13px;
+    font-weight: bold;
+}
+ 
+.instruktor .media .custom-media-text {
+    min-height: 60px !important;
+    max-height: 60px !important;
+    overflow-y: hidden
+}
+.instruktor .media .well { margin-bottom: 0px !important }
+
+.instruktor select.ui-datepicker-month {
+    color: #343434 !important;
+}
+
+/*.instruktor input.txtDatum { width: 15% !important; }*/
+
+
+/* Set width on the form input elements since they're 100% wide by default */
+.frmKurs .form-control,
+.frmZadaca .form-control
+{
+    max-width: 420px !important;
+}
+
+.frmPretraga .form-group.txt-search input {
+    min-width: 49.5%;
+    max-width: 49.5%;
+}
+
+.frmPretraga .form-group.enum-select-boxes select {
+    min-width: 49%;
+    max-width: 49%;
+}
+
+.instruktor form span.field-validation-error {
+    display: block;
+    clear: left;
+    text-align: center;
+    color: red;
+}
+
+
+
+
+.instruktor #PolazniciWrapper .badge.kurs-ocjena {
+    font-size: 16px;
+    background-color: #74ba72;
+}
+
+
+/** KRAJ INSTRUKTOR **/
+
+

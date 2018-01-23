@@ -1,0 +1,27 @@
+﻿@model eAkademija.Web.Areas.Instruktor.ViewModels.PitanjeOdgovorManageVM
+
+@{
+    Layout = null;
+}
+
+
+@using (Ajax.BeginForm("SnimiOdgovor", "PitanjeOdgovor", new AjaxOptions { UpdateTargetId = "qa"} ))
+{
+    @Html.HiddenFor(x => x.PitanjeOdgovorId)
+    @Html.HiddenFor(x => x.PitanjeOdgovorKursId)
+
+    <div class="form-group">
+        @Html.TextAreaFor(x => x.PitanjeOdgovorOdgovor, new { @class = "form-control", @style = "width: 500px; height: 80px" })
+        <span>@Html.ValidationMessageFor(x => x.PitanjeOdgovorOdgovor)</span>
+    </div>
+
+    <input type="submit" class="btn btn-xs btn-success" value="Pošalji" />
+}
+
+@*@using (Ajax.BeginForm("Odustani", "PitanjeOdgovor", new AjaxOptions { UpdateTargetId = "" }))
+{
+    @Ajax.ActionLink("<< Poništi i vrati se nazad", "Odustani", "Zadaca",
+                                     new { @kursId = Model. },
+                                     new AjaxOptions { UpdateTargetId = "" },
+                                     new { @class = "btn btn-sm btn-danger" })
+}*@

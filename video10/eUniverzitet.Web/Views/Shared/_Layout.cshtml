@@ -46,17 +46,17 @@
                         @Html.Partial("_UlogaSuperAdmin")
                     }
 
-                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.AdministratorInstitucije))
+                    @if (korisnik.Zaposlenik != null && (korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.AdministratorInstitucije) || korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.SuperAdministrator)))
                     {
                         @Html.Partial("_UlogaAdministratorInstitucije")
                     }
 
-                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.StudentskaSluzba))
+                    @if (korisnik.Zaposlenik != null && (korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.StudentskaSluzba) || korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.SuperAdministrator)))
                     {
                         @Html.Partial("_UlogaStudentskaSluzba")
                     }
 
-                    @if (korisnik.Zaposlenik != null && korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.Edukator))
+                    @if (korisnik.Zaposlenik != null && (korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.Edukator) || korisnik.Zaposlenik.Zaposlenja.Any(x => x.KorisnickaUloga == KorisnickaUloga.SuperAdministrator)))
                     {
                         @Html.Partial("_UlogaEdukator")
                     }

@@ -1,0 +1,24 @@
+﻿@model eAkademija.Web.Areas.Instruktor.ViewModels.StudentZadacaManageVM
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("SnimiOcjenu", "StudentZadaca", FormMethod.Post, new { @class = "form-inline" }))
+{
+    // inicijalno prikazi prazan string umjesto vrijednosti -1 iz baze
+    // nakon klika na "Izmijeni", prikazi prethodno unesenu vrijednost
+    string val = (Model.StudentZadacaPoeni == -1 ? "" : Model.StudentZadacaPoeni.ToString());
+
+    @Html.HiddenFor(x => x.StudentZadacaId)
+    @Html.HiddenFor(x => x.StudentZadacaZadacaId)
+
+    <div class="form-group">
+        <span style="font-size: 0.8em">@Html.ValidationMessageFor(x => x.StudentZadacaPoeni)</span>
+        @Html.TextBoxFor(x => x.StudentZadacaPoeni, new { @class = "form-control", @style = "width: 50px", @Value = val }) 
+        <span><string> / @Model.StudentZadacaUkupnoBodova</string></span>
+    </div>
+
+    <input type="submit" class="btn btn-sm btn-success" value="Spremi" />
+
+}

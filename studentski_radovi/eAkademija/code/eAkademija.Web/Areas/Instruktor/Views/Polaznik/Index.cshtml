@@ -1,0 +1,45 @@
+﻿@using eAkademija.Web.Areas.Instruktor.ViewModels
+@model eAkademija.Web.Areas.Instruktor.ViewModels.PolaznikIndexVM
+
+@{
+    Layout = null;
+}
+
+
+@foreach (PolaznikRow item in Model.Polaznici)
+{
+    bool jeOcijenjen = (item.PolaznikOcjena > 0 ? true : false);
+
+    <div class="media polaznik-stavka">
+        <div class="media-left">
+            <a href="#"><img class="media-object" src="@item.PolaznikSlikaPutanja" alt="user photo"></a>
+        </div>
+        <div class="media-body">
+            <h4>@item.PolaznikPrezimeIme</h4>
+
+            <div class="well well-sm">
+                <div class="row">
+
+                    <div id="Ocijeni-@item.PolaznikId" class="col-sm-4">
+
+                        <a href="#" class="btn btn-xs btn-primary">Vidi profil</a>
+
+                        @if (jeOcijenjen)
+                        {
+                            <span>Ocjena na kursu</span> <span class="badge kurs-ocjena">@item.PolaznikOcjena</span>
+                        }
+                        else
+                        {
+                            @Ajax.ActionLink("Ocijeni", "Ocijeni", "Polaznik", new { @kursId = Model.PolaznikKursId, @polaznikId = @item.PolaznikId }, new AjaxOptions { UpdateTargetId = "Ocijeni-" + @item.PolaznikId }, new { @class = "btn btn-xs btn-success" })
+                        }
+                    </div>
+
+                    <div class="col-sm-8 text-right">
+                        Pohađa kurseva <span class="badge">@item.PolaznikPohadjaKursCount</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

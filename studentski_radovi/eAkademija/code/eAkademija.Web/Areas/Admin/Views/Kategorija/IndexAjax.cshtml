@@ -1,0 +1,69 @@
+﻿@using eAkademija.Data.Model;
+@using eAkademija.Data.Enums;
+@model IEnumerable<Kategorija>
+@{ 
+    Layout = null;
+}
+
+<div id="dodajKategorija">
+
+</div>
+
+
+<div class="panel panel-default">
+
+    <div class="panel panel-heading">
+        <h4 class="kategorija-title"> Lista Kategorija </h4>
+        @Ajax.ActionLink("Nova Kategorija", "Add", null, new AjaxOptions { UpdateTargetId = "dodajKategorija" }, new { @class = "btn btn-primary pull-right" })
+
+        <form action="/Admin/Kategorija/Index" method="get" id="kategory-filter-form">
+            <select name="status" class="form-control select-category">
+                <option value="1" @( ViewBag.status == KategorijaStatus.ACTIVE ? "selected" : "")> Odobrena </option>
+                <option value="0" @( ViewBag.status == KategorijaStatus.FLAGGED_FOR_PERMISSION ? "selected" : "")> Ceka odobrenje </option>
+            </select>
+            <button class="btn btn-success pull-right btn-search-category"> Pretraga </button>
+        </form>
+    </div>
+
+    <div id="afterAdd" class="panel panel-body">
+
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <td> Id </td>
+                    <td> Naziv Kategorije </td>
+                    <td> Status </td>
+                    <td> Action </td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var kategorija in Model)
+                {
+                    <tr>
+                        <td> @kategorija.Id </td>
+                        <td> @kategorija.Naziv </td>
+                        <td>
+                            @Ajax.ActionLink(kategorija.GetDisplayName(kategorija.KategorijaStatus), "UpdateStatus", new { categoryId = kategorija.Id }, new AjaxOptions { UpdateTargetId = "index-content" }, new { @class = "" })
+                        </td>
+                        <td> @Ajax.ActionLink("Delete", "Delete", new { categoryId = kategorija.Id, status = ViewBag.status }, new AjaxOptions { UpdateTargetId = "index-content" }, new { @class = "btn btn-danger" }) </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+﻿
+
+<h2>title</h2>
+
+
+<div class="form-horizontal">
+    <label>Naslov poruke</label>
+    <input name="naslov" class="form-control"  />
+</div>
+
+@using (Ajax.BeginForm("Operacija1", "TestEditor", new AjaxOptions() { UpdateTargetId = "izlaz" }))
+{
+
+    <div class="form-horizontal">
+        <label>Naslov poruke</label>
+        <input name="naslov" class="form-control"  />
+    </div>
+    
+    <div class="form-horizontal">
+        <label>Sadržaj poruke</label>
+        <textarea name="tekst" class="form-control" >  </textarea>
+    </div>
+
+    <input type="submit" value="Snimi" />
+}
+
+<div id="izlaz">
+ 
+</div>

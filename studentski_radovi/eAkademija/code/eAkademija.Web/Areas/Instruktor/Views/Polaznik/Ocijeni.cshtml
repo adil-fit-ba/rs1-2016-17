@@ -1,0 +1,20 @@
+﻿@model eAkademija.Web.Areas.Instruktor.ViewModels.PolaznikManageVM
+
+@{
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("SnimiOcjenu", "Polaznik", null, new AjaxOptions { UpdateTargetId = "PolazniciWrapper" }, new { @class = "form-inline" }))
+{
+
+    @Html.HiddenFor(x => x.PolaznikId)
+    @Html.HiddenFor(x => x.PolaznikKursId)
+
+    <div class="form-group">
+        <span style="font-size: 0.8em">@Html.ValidationMessageFor(x => x.PolaznikOcjena)</span>
+        @Html.TextBoxFor(x => x.PolaznikOcjena, new { @class = "form-control", @style = "width: 80px", @Value = "" })
+    </div>
+
+    <input type="submit" class="btn btn-xs btn-success" value="Spremi" />
+
+}

@@ -1,0 +1,80 @@
+﻿
+@model IEnumerable<eAkademija.Web.Areas.Student.ViewModels.ZadacaVM>
+
+@{
+    Layout = null;
+    Boolean firstIteration = true;
+    string openByDefault = "";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel-group" id="accordion" role="tablist">
+
+            @if(Model.Count() == 0)
+            {
+                <div class="form-group">
+                    <hr />
+                    <h4>Trenutno nema aktivnih zadaća</h4>
+                </div>
+      
+            }
+
+            @foreach (var item in Model)
+            {
+                openByDefault = (firstIteration == true ? "in" : "");
+
+                <div class="panel panel-default">
+                    <div id="heading-@item.ZadacaId" class="panel-heading" role="tab">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse-@item.ZadacaId" class="collapsed">
+                                @item.Naslov (<strong>@item.UkupnoBodova bodova</strong>)
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapse-@item.ZadacaId" class="panel-collapse collapse @openByDefault" role="tabpanel">
+                        <div class="row panel-body">
+                            <div class="col-md-7">
+                                @item.Opis
+                            </div>
+                            <div class="col-md-5 text-right">
+
+
+                                @if((item.Rjesenje == null || item.Rjesenje==""))
+                                { 
+
+                                @Ajax.ActionLink("Dodaj", "Dodaj", "Zadaca",
+                                     new { @id = item.ZadacaId },
+                                     new AjaxOptions
+                                     {
+                                         UpdateTargetId = "KursZadace",
+                                         //LoadingElementId = "progress"
+                                     },
+                                     new { @class = "btn btn-sm btn-success" })
+                                }
+                                else if (item.TrenutnoBodova == -1)
+                                {
+                                    <p>Zadaća još nije bodovan</p>
+                                }
+                                else
+                                {
+                                    <p>Osvojili ste: @item.TrenutnoBodova bodova</p>
+                                }
+
+                            </div>
+               
+                        </div>
+                    </div>
+
+                </div>
+                firstIteration = false;
+            }
+          
+        </div>
+    </div>
+</div>
+
+

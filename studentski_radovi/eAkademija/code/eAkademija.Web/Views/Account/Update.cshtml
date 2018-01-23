@@ -1,0 +1,151 @@
+﻿
+@model eAkademija.Data.Model.AppUser
+
+@{ IEnumerable<SelectListItem> selectGradovi = (IEnumerable<SelectListItem>)ViewBag.gradovi;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+@section Jumbotron {
+    <div class="jumbotron jumbotron-small cover">
+        <div class="inner text-center">
+            <div class="container">
+                <img class="img-circle" src="@Model.ProfilePictureName" height="96">
+                <h2>Pozdrav, @Model.Ime</h2>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+<div></div>
+
+
+
+<div class="container" style="margin-bottom:100px">
+    @if (TempData["ResponseMessage"] != null)
+    {
+        <div class="row">
+            <div id="response">
+                <div class="alert alert-success" role="alert">
+                    @{
+                        string ResponseMessage = (string)TempData["ResponseMessage"];
+                    }
+                    <p class="text-grey">@ResponseMessage</p>
+                </div>
+            </div>
+        </div>
+                        }
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="profile-item active" role="presentation"><a href="#tab-favorites" aria-controls="favorites" role="tab" data-toggle="tab">Favoriti</a></li>
+                <li class="profile-item" role="presentation"><a href="#tab-settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-9">
+
+
+
+      
+
+
+            <div class="tab-content">
+
+                <div role="tabpanel" class="tab-pane fade" id="tab-settings">
+
+
+            @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+
+                @Html.AntiForgeryToken();
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+                                <div class="form-group">
+                                    <label> Ime </label>
+                                    @Html.TextBoxFor(x => x.Ime, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Prezime </label>
+                                    @Html.TextBoxFor(x => x.Prezime, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Email </label>
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-group">
+                                    <input name="profile_picture" type="file" class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label> Grad </label>
+                                    @Html.DropDownListFor(x => x.GradId, selectGradovi, new { @class = "form-control" })
+                                </div>
+
+                                <button type="submit" class="btn btn-primary"> Spasi Promjene </button>
+
+
+                            </div>
+
+                            <div class="clearfix mt-30 visible-xs visible-sm"></div>
+                            <div class="col-md-6">
+        
+
+                                <div class="form-group">
+                                    <label> Username </label>
+                                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @readonly="readonly" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.Label("PasswordHash", "New Password")
+                                    @Html.Password("PasswordHash", "", new { @class = "form-control" , autocomplete = "new-password", minlength = "6" })
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade in active" id="tab-favorites" style="padding: 0 10px;">
+                    
+                    @if (User.IsInRole("Student"))
+                    {
+
+                        @Html.Action("PrikaziFavorite", "Kurs", new { area = "Student" })
+
+
+                    }
+                    else
+                    {
+                        <h2>Nemate trenutno favorita </h2>
+                    }
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+
+

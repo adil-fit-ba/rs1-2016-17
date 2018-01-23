@@ -1,0 +1,25 @@
+﻿@model eAkademija.Web.Areas.Student.ViewModels.PitanjeOdgovorPostavi
+
+@{
+    Layout = null;
+
+}
+
+    <hr />
+
+    @using (Ajax.BeginForm("SnimiPitanje", "PitanjeOdgovor", new AjaxOptions { UpdateTargetId = "pitanja", OnSuccess = "OnPitanjeSuccess" }))
+    {
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.StudentKursId)
+        @Html.HiddenFor(x => x.DatumPitanja)
+        @Html.HiddenFor(x => x.KursId)
+        <div class="form-group">
+            @Html.TextAreaFor(x => x.Pitanje, new { @class = "form-control", @style = "height: 80px" })
+            <span>@Html.ValidationMessageFor(x => x.Pitanje)</span>
+        </div>
+
+        <input type="submit" class="btn btn-xs btn-success" value="Pitaj" />
+
+    }
+
+

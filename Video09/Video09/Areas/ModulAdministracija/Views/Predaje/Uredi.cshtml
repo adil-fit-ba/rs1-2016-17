@@ -1,0 +1,55 @@
+﻿@model MVC.Areas.ModulAdministracija.Models.PredajeUrediVM
+
+
+@{
+    Layout = null;
+}
+<div>
+    <div class="control-group">
+        <label>Fakultet</label>
+        @Html.TextBoxFor(model => model.FakultetNaziv, new { @class = "form-control", @disabled = "disabled" })
+    </div>
+
+    <div class="control-group">
+        <label>Smjer</label>
+        @Html.TextBoxFor(model => model.SmjerNaziv, new { @class = "form-control", @disabled = "disabled" })
+    </div>
+
+    <div class="control-group">
+        <label>NPP</label>
+        @Html.TextBoxFor(model => model.NppNaziv, new { @class = "form-control", @disabled = "disabled" })
+    </div>
+
+    <div class="control-group">
+        <label>Predmet</label>
+        @Html.TextBoxFor(model => model.PredmetNaziv, new { @class = "form-control", @disabled = "disabled" })
+    </div>
+</div>
+
+@using (Ajax.BeginForm("Snimi", "Predaje", new AjaxOptions() { UpdateTargetId = "predavaci-output" }))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PredmetId)
+
+ 
+   
+
+
+    <div class="control-group">
+        <label>Nastavnik</label>
+        @Html.DropDownListFor(model => model.NastavnikId, Model.NastavniciStavke, new { @class = "form-control" })
+    </div>
+
+    <div class="control-group">
+        <label>Akademska godina</label>
+        @Html.DropDownListFor(model => model.AkademskaGodinaId, Model.AkademskeGodineStavke, new {@class = "form-control"})
+    </div>
+    
+    <input type="submit" value="Snimi" class="btn btn-danger" />
+}
+
+
+
+
+
+

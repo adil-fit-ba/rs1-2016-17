@@ -1,0 +1,12 @@
+Link: rs1124.app.fit.ba
+Podaci za prijavu:
+
+user: mladen
+pw : kuca12345
+
+ili kreirajte novog usera tipa student
+
+Modul Administrator aplikacija e-Akademija*
+
+username: root
+password: root1234
